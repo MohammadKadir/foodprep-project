@@ -5,12 +5,16 @@ const User = require('../models/user');
 
 const router = express.Router();
 
+// ✅ Test route
+router.get("/test", (req, res) => {
+  res.json({ message: "Auth test successful" });
+});
+
 // Register
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // Check if user already exists
     const existing = await User.findOne({ email });
     if (existing) {
       return res.status(400).json({ error: 'Email already registered' });
